@@ -4,7 +4,9 @@ import "./App.css";
 function App() {
   const [notes, setNotes] = useState("");
   const [output, setOutput] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [summaryLoading, setSummaryLoading] = useState(false);
+  const [flashcardsLoading, setFlashcardsLoading] = useState(false);
+  const [quizLoading, setQuizLoading] = useState(false);
 
   const handleSummarize = async () => {
     if (!notes.trim()) {
@@ -12,7 +14,7 @@ function App() {
       return;
     }
 
-    setLoading(true);
+    setSummaryLoading(true);
 
     try {
       const response = await fetch("http://localhost:5000/summarize", {
@@ -30,7 +32,7 @@ function App() {
       console.error(error);
       setOutput("Something went wrong.");
     } finally {
-      setLoading(false);
+      setSummaryLoading(false);
     }
   };
 
@@ -40,7 +42,7 @@ function App() {
     return;
     }
 
-    setLoading(true);
+    setFlashcardsLoading(true);
 
     try {
       const response = await fetch(
@@ -63,7 +65,7 @@ function App() {
 
       setOutput("Something went wrong.");
     } finally {
-      setLoading(false);
+      setFlashcardsLoading(false);
     }
   };
 
@@ -73,7 +75,7 @@ function App() {
       return;
     }
 
-    setLoading(true);
+    setQuizLoading(true);
 
     try {
       const response = await fetch(
@@ -89,7 +91,7 @@ function App() {
 
       const data = await response.json();
 
-      setOutput(data.quiz);
+      setQuizOutput(data.quiz);
 
     } catch (error) {
       console.error(error);
@@ -112,15 +114,15 @@ function App() {
         />
 
         <div className="buttons">
-          <button onClick={handleSummarize} disabled={loading}>
+          <button onClick={handleSummarize} disabled={summaryLoading}>
             {loading ? "Generating..." : "Summarize"}
           </button>
 
-          <button onClick={handleFlashcards} disabled={loading}>
+          <button onClick={handleFlashcards} disabled={flashcardsLoading}>
             {loading ? "Generating..." : "Generate Flashcards"}
           </button>
 
-          <button onClick={handleQuiz}>
+          <button onClick={handleQuiz} disabled={quizLoading}>
             {loading ? "Generating..." : "Generate Quiz"}
           </button>
         </div>
