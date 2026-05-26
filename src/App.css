@@ -3,7 +3,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #f4f6f8;
+  background: linear-gradient(
+    to bottom right,
+    #eef2ff,
+    #f8fafc
+  );
   font-family: Arial, sans-serif;
 }
 
