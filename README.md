@@ -1,13 +1,13 @@
 # AI Study Assistant
 
-An AI-powered full-stack web application that generates summaries, flashcards, and quizzes from study notes using large language models.
+An AI-powered full-stack study platform that generates summaries, flashcards, and quizzes from user-provided notes using large language models.
 
 ## Live Demo
 
-Frontend:
-https://YOUR-VERCEL-URL.vercel.app
+Frontend: 
+https://tohma-ai-study.vercel.app
 
-Backend API:
+Backend API: 
 https://ai-study-assistant-ax6e.onrender.com
 
 ---
@@ -22,7 +22,7 @@ https://ai-study-assistant-ax6e.onrender.com
 - Dark mode with persistent theme storage
 - Loading states and error handling
 - Responsive modern UI
-- Dockerized frontend and backend deployment
+- Dockerized frontend and backend services
 
 ---
 
