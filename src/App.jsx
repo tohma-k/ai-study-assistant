@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+import ReactMarkdown from "react-markdown";
 
 function App() {
   const [notes, setNotes] = useState("");
@@ -131,13 +132,13 @@ function App() {
 
         <section className="output">
           <h2>Summary</h2>
-          <p>{summary}</p>
+          <ReactMarkdown>{summary}</ReactMarkdown>
 
           <h2>Flashcards</h2>
-          <p>{flashcards}</p>
+          <ReactMarkdown>{flashcards}</ReactMarkdown>
 
           <h2>Quiz</h2>
-          <p>{quiz}</p>
+          <ReactMarkdown>{quiz}</ReactMarkdown>
         </section>
       </section>
     </main>
