@@ -23,6 +23,7 @@ textarea {
   padding: 16px;
   font-size: 16px;
   resize: vertical;
+  box-sizing: border-box;
 }
 
 .buttons {
