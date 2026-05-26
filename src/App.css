@@ -25,6 +25,20 @@ textarea {
   font-size: 16px;
   resize: vertical;
   box-sizing: border-box;
+
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+
+  font-family: inherit;
+  line-height: 1.5;
+
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
 .buttons {
