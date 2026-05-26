@@ -3,6 +3,8 @@ import "./App.css";
 import ReactMarkdown from "react-markdown";
 
 function App() {
+  const [darkMode, setDarkMode] = useState(false);
+
   const [notes, setNotes] = useState("");
 
   const [summary, setSummary] = useState("");
@@ -167,7 +169,7 @@ function App() {
   const charCount = notes.length;
 
   return (
-    <main className="app">
+    <main className={`app ${darkMode ? "dark" : ""}`}>
       <section className="card">
         <header className="hero">
           <h1>AI Study Assistant</h1>
@@ -177,6 +179,13 @@ function App() {
             from your study notes using AI.
           </p>
         </header>
+
+        <button
+          className="theme-toggle"
+          onClick={() => setDarkMode(!darkMode)}
+        >
+          {darkMode ? "Light Mode" : "Dark Mode"}
+        </button>
 
         <textarea
           placeholder="Paste your notes here..."
