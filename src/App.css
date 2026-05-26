@@ -11,6 +11,23 @@
   font-family: Arial, sans-serif;
 }
 
+.hero {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: #0f172a;
+}
+
+.hero p {
+  color: #475569;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
 .card {
   width: min(90%, 900px);
   max-width: 800px;

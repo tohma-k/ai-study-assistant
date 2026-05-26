@@ -108,7 +108,14 @@ function App() {
   return (
     <main className="app">
       <section className="card">
-        <h1>AI Study Assistant</h1>
+        <header className="hero">
+          <h1>AI Study Assistant</h1>
+
+          <p>
+            Generate summaries, flashcards, and quizzes
+            from your study notes using AI.
+          </p>
+        </header>
 
         <textarea
           placeholder="Paste your notes here..."
