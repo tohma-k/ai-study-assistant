@@ -3,14 +3,16 @@ import "./App.css";
 
 function App() {
   const [notes, setNotes] = useState("");
-  const [output, setOutput] = useState("");
+  const [summary, setSummary] = useState("");
+  const [flashcards, setFlashcards] = useState("");
+  const [quiz, setQuiz] = useState("");
   const [summaryLoading, setSummaryLoading] = useState(false);
   const [flashcardsLoading, setFlashcardsLoading] = useState(false);
   const [quizLoading, setQuizLoading] = useState(false);
 
   const handleSummarize = async () => {
     if (!notes.trim()) {
-      setOutput("Please enter notes before summarizing.");
+      setSummary("Please enter notes before summarizing.");
       return;
     }
 
@@ -27,10 +29,10 @@ function App() {
 
       const data = await response.json();
 
-      setOutput(data.summary);
+      setSummary(data.summary);
     } catch (error) {
       console.error(error);
-      setOutput("Something went wrong.");
+      setSummary("Something went wrong.");
     } finally {
       setSummaryLoading(false);
     }
@@ -38,7 +40,7 @@ function App() {
 
   const handleFlashcards = async () => {
     if (!notes.trim()) {
-      setOutput("Please enter notes before generating flashcards.");
+      setFlashcards("Please enter notes before generating flashcards.");
       return;
     }
 
@@ -58,12 +60,12 @@ function App() {
 
       const data = await response.json();
 
-      setOutput(data.flashcards);
+      setFlashcards(data.flashcards);
 
     } catch (error) {
       console.error(error);
 
-      setOutput("Something went wrong.");
+      setFlashcards("Something went wrong.");
     } finally {
       setFlashcardsLoading(false);
     }
@@ -71,7 +73,7 @@ function App() {
 
   const handleQuiz = async () => {
     if (!notes.trim()) {
-      setOutput("Please enter notes before generating a quiz.");
+      setQuiz("Please enter notes before generating a quiz.");
       return;
     }
 
@@ -91,12 +93,12 @@ function App() {
 
       const data = await response.json();
 
-      setOutput(data.quiz);
+      setQuiz(data.quiz);
 
     } catch (error) {
       console.error(error);
 
-      setOutput("Something went wrong.");
+      setQuiz("Something went wrong.");
     } finally {
       setQuizLoading(false);
     }
@@ -128,8 +130,14 @@ function App() {
         </div>
 
         <section className="output">
-          <h2>Output</h2>
-          <p>{output}</p>
+          <h2>Summary</h2>
+          <p>{summary}</p>
+
+          <h2>Flashcards</h2>
+          <p>{flashcards}</p>
+
+          <h2>Quiz</h2>
+          <p>{quiz}</p>
         </section>
       </section>
     </main>
