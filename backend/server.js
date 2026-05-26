@@ -1,24 +1,52 @@
+require("dotenv").config();
+
 const express = require("express");
 const cors = require("cors");
+const Groq = require("groq-sdk");
 
 const app = express();
 const PORT = 5000;
 
+const groq = new Groq({
+  apiKey: process.env.GROQ_API_KEY,
+});
+
 app.use(cors());
 app.use(express.json());
 
-app.post("/summarize", (req, res) => {
-  const { notes } = req.body;
+app.post("/summarize", async (req, res) => {
+  try {
+    const { notes } = req.body;
 
-  if (!notes || notes.trim() === "") {
-    return res.status(400).json({ error: "Notes are required." });
+    const completion =
+      await groq.chat.completions.create({
+        messages: [
+          {
+            role: "system",
+            content:
+              "You are a helpful study assistant.",
+          },
+          {
+            role: "user",
+            content: `Summarize these notes:\n${notes}`,
+          },
+        ],
+        model: "llama-3.3-70b-versatile",
+      });
+
+    const summary =
+      completion.choices[0].message.content;
+
+    res.json({ summary });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      error: "Server error",
+    });
   }
-
-  const summary = `Summary: ${notes.slice(0, 150)}...`;
-
-  res.json({ summary });
 });
 
 app.listen(PORT, () => {
-  console.log(`Backend running on http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
