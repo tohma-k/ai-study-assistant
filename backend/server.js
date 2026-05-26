@@ -47,6 +47,46 @@ app.post("/summarize", async (req, res) => {
   }
 });
 
+app.post("/flashcards", async (req, res) => {
+  try {
+    const { notes } = req.body;
+
+    if (!notes || notes.trim() === "") {
+      return res.status(400).json({
+        error: "Notes are required.",
+      });
+    }
+
+    const completion =
+      await groq.chat.completions.create({
+        messages: [
+          {
+            role: "system",
+            content:
+              "You generate concise study flashcards. Format each flashcard as Q: question A: answer.",
+          },
+          {
+            role: "user",
+            content: `Create 5 flashcards from these notes:\n\n${notes}`,
+          },
+        ],
+        model: "llama-3.3-70b-versatile",
+      });
+
+    const flashcards =
+      completion.choices[0].message.content;
+
+    res.json({ flashcards });
+
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      error: "Server error",
+    });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
