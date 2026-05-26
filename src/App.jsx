@@ -1,10 +1,8 @@
-import { useState } from "react";
 import "./App.css";
 import ReactMarkdown from "react-markdown";
+import { useState, useEffect } from "react";
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false);
-
   const [notes, setNotes] = useState("");
 
   const [summary, setSummary] = useState("");
@@ -22,6 +20,14 @@ function App() {
   const [quizOpen, setQuizOpen] = useState(false);
 
   const [status, setStatus] = useState("");
+
+  const [darkMode, setDarkMode] = useState(() => {
+    return localStorage.getItem("darkMode") === "true";
+  });
+
+  useEffect(() => {
+    localStorage.setItem("darkMode", darkMode);
+  }, [darkMode]);
 
   const handleSummarize = async () => {
     if (!notes.trim()) {
