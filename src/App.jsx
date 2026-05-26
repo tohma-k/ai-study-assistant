@@ -10,6 +10,7 @@ function App() {
   const [summaryLoading, setSummaryLoading] = useState(false);
   const [flashcardsLoading, setFlashcardsLoading] = useState(false);
   const [quizLoading, setQuizLoading] = useState(false);
+  const [copiedType, setCopiedType] = useState("");
   const [status, setStatus] = useState("");
 
   const handleSummarize = async () => {
@@ -136,6 +137,17 @@ function App() {
     setQuiz("");
   };
 
+  const copyToClipboard = (text, type) => {
+    if (!text.trim()) return;
+
+    navigator.clipboard.writeText(text);
+    setCopiedType(type);
+
+    setTimeout(() => {
+      setCopiedType("");
+    }, 2000);
+  };
+
   const wordCount =
     notes.trim() === ""
       ? 0
@@ -198,26 +210,54 @@ function App() {
               <ReactMarkdown>
                 {summary}
               </ReactMarkdown>
+              
+              {summary && (
+                <button
+                  className={`copy-button ${copiedType === "summary" ? "copied" : ""}`}
+                  onClick={() => copyToClipboard(summary, "summary")}
+                >
+                  {copiedType === "summary" ? "Copied!" : "Copy"}
+                </button>
+              )}
             </details>
           </div>
 
           <div className="output-card">
-            <details>
+            <details open>
               <summary>Flashcards</summary>
 
               <ReactMarkdown>
                 {flashcards}
               </ReactMarkdown>
+
+              
+              {flashcards && (
+                <button
+                  className={`copy-button ${copiedType === "flashcards" ? "copied" : ""}`}
+                  onClick={() => copyToClipboard(flashcards, "flashcards")}
+                >
+                  {copiedType === "flashcards" ? "Copied!" : "Copy"}
+                </button>
+              )}
             </details>
           </div>
 
           <div className="output-card">
-            <details>
+            <details open>
               <summary>Quiz</summary>
 
               <ReactMarkdown>
                 {quiz}
               </ReactMarkdown>
+
+              {quiz && (
+                <button
+                  className={`copy-button ${copiedType === "quiz" ? "copied" : ""}`}
+                  onClick={() => copyToClipboard(quiz, "quiz")}
+                >
+                  {copiedType === "quiz" ? "Copied!" : "Copy"}
+                </button>
+              )}             
             </details>
           </div>
         </section>
