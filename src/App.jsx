@@ -130,15 +130,21 @@ function App() {
           </button>
         </div>
 
-        <section className="output">
-          <h2>Summary</h2>
-          <ReactMarkdown>{summary}</ReactMarkdown>
+        <section className="output-section">
+          <div className="output-card">
+            <h2>Summary</h2>
+            <ReactMarkdown>{summary}</ReactMarkdown>
+          </div>
 
-          <h2>Flashcards</h2>
-          <ReactMarkdown>{flashcards}</ReactMarkdown>
+          <div className="output-card">
+            <h2>Flashcards</h2>
+            <ReactMarkdown>{flashcards}</ReactMarkdown>
+          </div>
 
-          <h2>Quiz</h2>
-          <ReactMarkdown>{quiz}</ReactMarkdown>
+          <div className="output-card">
+            <h2>Quiz</h2>
+            <ReactMarkdown>{quiz}</ReactMarkdown>
+          </div>
         </section>
       </section>
     </main>

@@ -38,13 +38,20 @@ button {
   cursor: pointer;
 }
 
-.output {
+.output-section {
   margin-top: 24px;
-  padding: 16px;
-  background: #f9fafb;
-  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.output p {
-  white-space: pre-wrap;
+.output-card {
+  background: #f9fafb;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+}
+
+.output-card h2 {
+  margin-bottom: 12px;
 }
