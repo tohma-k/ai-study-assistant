@@ -6,6 +6,10 @@ function App() {
   const [output, setOutput] = useState("");
 
   const handleSummarize = async () => {
+    if (!notes.trim()) {
+      setOutput("Please enter notes before summarizing.");
+      return;
+    }
     try {
       const response = await fetch("http://localhost:5000/summarize", {
         method: "POST",
@@ -20,6 +24,63 @@ function App() {
       setOutput(data.summary);
     } catch (error) {
       console.error(error);
+      setOutput("Something went wrong.");
+    }
+  };
+
+  const handleFlashcards = async () => {
+    if (!notes.trim()) {
+    setOutput("Please enter notes before generating flashcards.");
+    return;
+  }
+    try {
+      const response = await fetch(
+        "http://localhost:5000/flashcards",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ notes }),
+        }
+      );
+
+      const data = await response.json();
+
+      setOutput(data.flashcards);
+
+    } catch (error) {
+      console.error(error);
+
+      setOutput("Something went wrong.");
+    }
+  };
+
+  const handleQuiz = async () => {
+    if (!notes.trim()) {
+      setOutput("Please enter notes before generating a quiz.");
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        "http://localhost:5000/quiz",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ notes }),
+        }
+      );
+
+      const data = await response.json();
+
+      setOutput(data.quiz);
+
+    } catch (error) {
+      console.error(error);
+
       setOutput("Something went wrong.");
     }
   };
@@ -40,11 +101,11 @@ function App() {
             Summarize
           </button>
 
-          <button>
+          <button onClick={handleFlashcards}>
             Generate Flashcards
           </button>
 
-          <button>
+          <button onClick={handleQuiz}>
             Generate Quiz
           </button>
         </div>

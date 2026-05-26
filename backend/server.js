@@ -87,6 +87,44 @@ app.post("/flashcards", async (req, res) => {
   }
 });
 
+app.post("/quiz", async (req, res) => {
+  try {
+    const { notes } = req.body;
+
+    if (!notes || notes.trim() === "") {
+      return res.status(400).json({
+        error: "Notes are required.",
+      });
+    }
+
+    const completion = 
+      await groq.chat.completions.create({
+        messages: [
+          {
+            role: "system",
+            content:
+            "You create study quizzes. Generate 5 short-answer quiz questions.",
+          },
+          {
+            role: "user",
+            content: `Create a quiz from these notes:\n\n${notes}`,
+          },
+        ],
+        model: "llama-3.3-70b-versatile",
+      });
+
+      const quiz = 
+        completion.choices[0].message.content;
+
+      res.json({ quiz });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      error: "Server error",
+    });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
