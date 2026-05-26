@@ -24,7 +24,10 @@ app.post("/summarize", async (req, res) => {
           {
             role: "system",
             content:
-              "You are a helpful study assistant.",
+              `You are a study assistant. 
+              Create concise, well-structured summaries. 
+              Use bullet points when helpful. 
+              Focus on key concepts and definitions.`,
           },
           {
             role: "user",
@@ -63,7 +66,14 @@ app.post("/flashcards", async (req, res) => {
           {
             role: "system",
             content:
-              "You generate concise study flashcards. Format each flashcard as Q: question A: answer.",
+              `You are a study assistant.
+              Generate 5 high-quality flashcards.
+
+              Format:
+              Q: ...
+              A: ...
+
+              Keep answers concise and educational.`,
           },
           {
             role: "user",
@@ -103,7 +113,15 @@ app.post("/quiz", async (req, res) => {
           {
             role: "system",
             content:
-            "You create study quizzes. Generate 5 short-answer quiz questions.",
+            `You are a study assistant.
+            Generate 5 short-answer quiz questions.
+
+            Format:
+            1.
+            2.
+            3.
+
+            Focus on important concepts from the notes.`,
           },
           {
             role: "user",
