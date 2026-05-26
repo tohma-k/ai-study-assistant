@@ -154,6 +154,9 @@ function App() {
     setSummary("");
     setFlashcards("");
     setQuiz("");
+    setSummaryOpen(false);
+    setFlashcardsOpen(false);
+    setQuizOpen(false);
   };
 
   const copyToClipboard = (text, type) => {
