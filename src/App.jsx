@@ -105,6 +105,13 @@ function App() {
     }
   };
 
+  const handleClear = () => {
+    setNotes("");
+    setSummary("");
+    setFlashcards("");
+    setQuiz("");
+  };
+
   return (
     <main className="app">
       <section className="card">
@@ -134,6 +141,10 @@ function App() {
 
           <button onClick={handleQuiz} disabled={quizLoading}>
             {quizLoading ? "Generating..." : "Generate Quiz"}
+          </button>
+
+          <button className="clear-button" onClick={handleClear}>
+            Clear
           </button>
         </div>
 

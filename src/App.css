@@ -89,6 +89,14 @@ button:disabled {
   cursor: not-allowed;
 }
 
+.clear-button {
+  background: #64748b;
+}
+
+.clear-button:hover {
+  background: #475569;
+}
+
 .output-section {
   margin-top: 24px;
   display: flex;
