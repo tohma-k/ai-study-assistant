@@ -10,6 +10,7 @@ function App() {
   const [summaryLoading, setSummaryLoading] = useState(false);
   const [flashcardsLoading, setFlashcardsLoading] = useState(false);
   const [quizLoading, setQuizLoading] = useState(false);
+  const [status, setStatus] = useState("");
 
   const handleSummarize = async () => {
     if (!notes.trim()) {
@@ -18,6 +19,7 @@ function App() {
     }
 
     setSummaryLoading(true);
+    setStatus("Generating summary...")
 
     try {
       const response = await fetch("http://localhost:5000/summarize", {
@@ -31,9 +33,13 @@ function App() {
       const data = await response.json();
 
       setSummary(data.summary);
+      setStatus("Summary generated successfully.")
+
     } catch (error) {
       console.error(error);
+
       setSummary("Something went wrong.");
+      setStatus("Failed to generate summary");
     } finally {
       setSummaryLoading(false);
     }
@@ -46,6 +52,7 @@ function App() {
     }
 
     setFlashcardsLoading(true);
+    setStatus("Generating flashcards...")
 
     try {
       const response = await fetch(
@@ -62,11 +69,13 @@ function App() {
       const data = await response.json();
 
       setFlashcards(data.flashcards);
+      setStatus("Flashcards generated successfully.")
 
     } catch (error) {
       console.error(error);
 
       setFlashcards("Something went wrong.");
+      setStatus("Failed to generate flashcards.")
     } finally {
       setFlashcardsLoading(false);
     }
@@ -79,6 +88,7 @@ function App() {
     }
 
     setQuizLoading(true);
+    setStatus("Generating quiz...")
 
     try {
       const response = await fetch(
@@ -95,11 +105,13 @@ function App() {
       const data = await response.json();
 
       setQuiz(data.quiz);
+      setStatus("Quiz generated successfully.")
 
     } catch (error) {
       console.error(error);
 
       setQuiz("Something went wrong.");
+      setStatus("Failed to generate quiz.")
     } finally {
       setQuizLoading(false);
     }
@@ -147,6 +159,12 @@ function App() {
             Clear
           </button>
         </div>
+
+        {status && (
+          <div className="status-message">
+            {status}
+          </div>
+        )}
 
         <section className="output-section">
           <div className="output-card">
