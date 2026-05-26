@@ -4,13 +4,21 @@ import ReactMarkdown from "react-markdown";
 
 function App() {
   const [notes, setNotes] = useState("");
+
   const [summary, setSummary] = useState("");
   const [flashcards, setFlashcards] = useState("");
   const [quiz, setQuiz] = useState("");
+
   const [summaryLoading, setSummaryLoading] = useState(false);
   const [flashcardsLoading, setFlashcardsLoading] = useState(false);
   const [quizLoading, setQuizLoading] = useState(false);
+
   const [copiedType, setCopiedType] = useState("");
+
+  const [summaryOpen, setSummaryOpen] = useState(false);
+  const [flashcardsOpen, setFlashcardsOpen] = useState(false);
+  const [quizOpen, setQuizOpen] = useState(false);
+
   const [status, setStatus] = useState("");
 
   const handleSummarize = async () => {
@@ -38,6 +46,7 @@ function App() {
       const data = await response.json();
 
       setSummary(data.summary);
+      setSummaryOpen(true);
       setStatus("Summary generated successfully.")
 
     } catch (error) {
@@ -78,6 +87,7 @@ function App() {
       const data = await response.json();
 
       setFlashcards(data.flashcards);
+      setFlashcardsOpen(true);
       setStatus("Flashcards generated successfully.")
 
     } catch (error) {
@@ -118,6 +128,7 @@ function App() {
       const data = await response.json();
 
       setQuiz(data.quiz);
+      setQuizOpen(true);
       setStatus("Quiz generated successfully.")
 
     } catch (error) {
@@ -204,7 +215,7 @@ function App() {
 
         <section className="output-section">
           <div className="output-card">
-            <details open>
+            <details open={summaryOpen}>
               <summary>Summary</summary>
 
               <ReactMarkdown>
@@ -223,7 +234,7 @@ function App() {
           </div>
 
           <div className="output-card">
-            <details open>
+            <details open={flashcardsOpen}>
               <summary>Flashcards</summary>
 
               <ReactMarkdown>
@@ -243,7 +254,7 @@ function App() {
           </div>
 
           <div className="output-card">
-            <details open>
+            <details open={quizOpen}>
               <summary>Quiz</summary>
 
               <ReactMarkdown>
