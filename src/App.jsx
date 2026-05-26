@@ -38,7 +38,10 @@ function App() {
     if (!notes.trim()) {
     setOutput("Please enter notes before generating flashcards.");
     return;
-  }
+    }
+
+    setLoading(true);
+
     try {
       const response = await fetch(
         "http://localhost:5000/flashcards",
@@ -59,6 +62,8 @@ function App() {
       console.error(error);
 
       setOutput("Something went wrong.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -67,6 +72,8 @@ function App() {
       setOutput("Please enter notes before generating a quiz.");
       return;
     }
+
+    setLoading(true);
 
     try {
       const response = await fetch(
@@ -88,6 +95,8 @@ function App() {
       console.error(error);
 
       setOutput("Something went wrong.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -107,12 +116,12 @@ function App() {
             {loading ? "Generating..." : "Summarize"}
           </button>
 
-          <button onClick={handleFlashcards}>
-            Generate Flashcards
+          <button onClick={handleFlashcards} disabled={loading}>
+            {loading ? "Generating..." : "Generate Flashcards"}
           </button>
 
           <button onClick={handleQuiz}>
-            Generate Quiz
+            {loading ? "Generating..." : "Generate Quiz"}
           </button>
         </div>
 
