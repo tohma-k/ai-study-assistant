@@ -139,18 +139,33 @@ function App() {
 
         <section className="output-section">
           <div className="output-card">
-            <h2>Summary</h2>
-            <ReactMarkdown>{summary}</ReactMarkdown>
+            <details open>
+              <summary>Summary</summary>
+
+              <ReactMarkdown>
+                {summary}
+              </ReactMarkdown>
+            </details>
           </div>
 
           <div className="output-card">
-            <h2>Flashcards</h2>
-            <ReactMarkdown>{flashcards}</ReactMarkdown>
+            <details>
+              <summary>Flashcards</summary>
+
+              <ReactMarkdown>
+                {flashcards}
+              </ReactMarkdown>
+            </details>
           </div>
 
           <div className="output-card">
-            <h2>Quiz</h2>
-            <ReactMarkdown>{quiz}</ReactMarkdown>
+            <details>
+              <summary>Quiz</summary>
+
+              <ReactMarkdown>
+                {quiz}
+              </ReactMarkdown>
+            </details>
           </div>
         </section>
       </section>

@@ -106,3 +106,14 @@ button:disabled {
 .output-card h2 {
   margin-bottom: 12px;
 }
+
+summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+}
+
+details[open] summary {
+  margin-bottom: 16px;
+}
