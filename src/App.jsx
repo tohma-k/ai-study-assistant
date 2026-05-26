@@ -30,6 +30,10 @@ function App() {
         body: JSON.stringify({ notes }),
       });
 
+      if (!response.ok) {
+        throw new Error("Request failed");
+      }
+
       const data = await response.json();
 
       setSummary(data.summary);
@@ -66,6 +70,10 @@ function App() {
         }
       );
 
+      if (!response.ok) {
+        throw new Error("Request failed");
+      }
+
       const data = await response.json();
 
       setFlashcards(data.flashcards);
@@ -101,6 +109,10 @@ function App() {
           body: JSON.stringify({ notes }),
         }
       );
+
+      if (!response.ok) {
+        throw new Error("Request failed");
+      }
 
       const data = await response.json();
 
