@@ -39,7 +39,7 @@ function App() {
     setStatus("Generating summary...")
 
     try {
-      const response = await fetch("http://localhost:5000/summarize", {
+      const response = await fetch("https://ai-study-assistant-ax6e.onrender.com/summarize", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -78,7 +78,7 @@ function App() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/flashcards",
+        "https://ai-study-assistant-ax6e.onrender.com/flashcards",
         {
           method: "POST",
           headers: {
@@ -119,7 +119,7 @@ function App() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/quiz",
+        "https://ai-study-assistant-ax6e.onrender.com/quiz",
         {
           method: "POST",
           headers: {
