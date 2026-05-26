@@ -4,12 +4,16 @@ import "./App.css";
 function App() {
   const [notes, setNotes] = useState("");
   const [output, setOutput] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSummarize = async () => {
     if (!notes.trim()) {
       setOutput("Please enter notes before summarizing.");
       return;
     }
+
+    setLoading(true);
+
     try {
       const response = await fetch("http://localhost:5000/summarize", {
         method: "POST",
@@ -25,6 +29,8 @@ function App() {
     } catch (error) {
       console.error(error);
       setOutput("Something went wrong.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -97,8 +103,8 @@ function App() {
         />
 
         <div className="buttons">
-          <button onClick={handleSummarize}>
-            Summarize
+          <button onClick={handleSummarize} disabled={loading}>
+            {loading ? "Generating..." : "Summarize"}
           </button>
 
           <button onClick={handleFlashcards}>
