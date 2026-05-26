@@ -136,6 +136,13 @@ function App() {
     setQuiz("");
   };
 
+  const wordCount =
+    notes.trim() === ""
+      ? 0
+      : notes.trim().split(/\s+/).length;
+
+  const charCount = notes.length;
+
   return (
     <main className="app">
       <section className="card">
@@ -153,6 +160,11 @@ function App() {
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
         />
+
+        <div className="note-stats">
+          <span>{wordCount} words</span>
+          <span>{charCount} characters</span>
+        </div>
 
         <div className="buttons">
           <button onClick={handleSummarize} disabled={summaryLoading}>
