@@ -38,8 +38,8 @@ function App() {
 
   const handleFlashcards = async () => {
     if (!notes.trim()) {
-    setOutput("Please enter notes before generating flashcards.");
-    return;
+      setOutput("Please enter notes before generating flashcards.");
+      return;
     }
 
     setFlashcardsLoading(true);
@@ -91,14 +91,14 @@ function App() {
 
       const data = await response.json();
 
-      setQuizOutput(data.quiz);
+      setOutput(data.quiz);
 
     } catch (error) {
       console.error(error);
 
       setOutput("Something went wrong.");
     } finally {
-      setLoading(false);
+      setQuizLoading(false);
     }
   };
 
@@ -115,15 +115,15 @@ function App() {
 
         <div className="buttons">
           <button onClick={handleSummarize} disabled={summaryLoading}>
-            {loading ? "Generating..." : "Summarize"}
+            {summaryLoading ? "Generating..." : "Summarize"}
           </button>
 
           <button onClick={handleFlashcards} disabled={flashcardsLoading}>
-            {loading ? "Generating..." : "Generate Flashcards"}
+            {flashcardsLoading ? "Generating..." : "Generate Flashcards"}
           </button>
 
           <button onClick={handleQuiz} disabled={quizLoading}>
-            {loading ? "Generating..." : "Generate Quiz"}
+            {quizLoading ? "Generating..." : "Generate Quiz"}
           </button>
         </div>
 
